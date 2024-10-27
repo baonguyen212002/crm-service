@@ -19,6 +19,22 @@ type Query {
     ): [User!]! @paginate(defaultCount: 10)
 }
 
+type Mutation {
+      createUser(input: CreateUserInput! @spread): User! @field(resolver: "App\\GraphQL\\Mutations\\User\\CreateUser") 
+}
+
+input UserCreateInput {
+    avatar: String
+    type: UserType
+    name: String
+    nickname: String
+    email: String
+    phone: String
+    password: String
+    status: UserStatus
+    role: String
+}
+
 "Account of a person who utilizes this application."
 type User {
     "Unique primary key."
