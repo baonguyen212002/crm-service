@@ -41,23 +41,23 @@ class PermissionsSeeder extends Seeder
             ],
             [
                 'id'    => 5,
-                'name'  => 'read_user',
-                'title' => 'xem tài khoản',
+                'name'  => 'read_user_profile',
+                'title' => 'xem thông tin tài khoản',
             ],
             [
                 'id'    => 6,
-                'name'  => 'create_user',
-                'title' => 'Thêm tài khoản',
+                'name'  => 'create_user_profile',
+                'title' => 'Thêm thông tin tài khoản',
             ],
             [
                 'id'    => 7,
-                'name'  => 'update_user',
-                'title' => 'cập nhật tài khoản',
+                'name'  => 'update_user_profile',
+                'title' => 'cập nhật thông tin tài khoản',
             ],
             [
                 'id'    => 8,
-                'name'  => 'delete_user',
-                'title' => 'Xoá tài khoản',
+                'name'  => 'delete_user_profile',
+                'title' => 'Xoá thông tài khoản',
             ],
             [
                 'id'    => 9,
