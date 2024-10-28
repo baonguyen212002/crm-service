@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->unsignedBigInteger('created_by_user_id')->nullable();
+            $table->unsignedBigInteger('created_by_user_id')->nullable()->after('password');
             $table->unsignedTinyInteger('status')->default(
                 \App\Enums\UserStatus::WAITING
-            );
+            )->after('created_by_user_id');
         });
     }
 

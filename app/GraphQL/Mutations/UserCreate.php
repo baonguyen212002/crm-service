@@ -1,9 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace App\GraphQL\Mutations\User;
+namespace App\GraphQL\Mutations;
 
 use App\Mail\LoginAccountInformationMail;
 use App\Models\User;
+use App\Models\UserProfile;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -11,7 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
-final class CreateUser
+final class UserCreate
 {
     /**
      * @param  null  $_
@@ -21,9 +22,9 @@ final class CreateUser
     {
         DB::beginTransaction();
         try {
-            if (!isset($args['department_id'])) {
-                $args['department_id'] = Auth::user()->department_id;
-            }
+            // if (!isset($args['department_id'])) {
+            //     $args['department_id'] = Auth::user()->department_id;
+            // }
 
             $user = new User();
             $user->fill($args);
@@ -36,6 +37,15 @@ final class CreateUser
             // $user->email_verified_at = now();
             // $user->remember_token = Str::random(10);
             $user->save();
+
+            UserProfile::create([
+                'avatar' => $args['avatar'] ?? null,
+                'phone' => $args['phone'] ?? null,
+                'address' => $args['address'] ?? null,
+                'city' => $args['city'] ?? null,
+                'userable_type' => User::class,
+                'userable_id' => $user->id
+            ]);
 
             if (isset($args['role'])) {
                 $user->assignRole($args['role']);
