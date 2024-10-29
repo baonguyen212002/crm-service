@@ -19,6 +19,24 @@ type Query {
     ): [User!]! @paginate(defaultCount: 10)
 }
 
+type Mutation {
+    userCreate(
+        input: UserCreateInput @spread
+    ):User
+}
+
+input UserCreateInput {
+    type: UserType
+    name: String
+    email: String
+    phone: String
+    password: String
+    status: UserStatus
+    role: String
+    address: String
+    city: String
+}
+
 "Account of a person who utilizes this application."
 type User {
     "Unique primary key."
