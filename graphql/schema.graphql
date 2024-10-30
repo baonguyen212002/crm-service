@@ -23,7 +23,27 @@ type Mutation {
     userCreate(
         input: UserCreateInput @spread
     ):User
+
+    userUpdate(
+        input: UserUpdateInput @spread
+    ):User
+
+    userDelete(
+        input: UserDeleteInput @spread
+    ):Boolean
+
+    userProfileUpdate (
+        input: UserProfileUpdateInput @spread
+    ):UserProfile
+
+    userProfileDelete(
+        input: UserProfileDeleteInput @spread
+    ):Boolean
 }
+
+#extend type Mutation @guard{
+#
+#}
 
 input UserCreateInput {
     type: UserType
@@ -33,8 +53,26 @@ input UserCreateInput {
     password: String
     status: UserStatus
     role: String
+}
+
+input UserUpdateInput {
+    name: String
+    password: String
+}
+
+input UserDeleteInput{
+    id: [ID!]!
+}
+
+input UserProfileUpdateInput{
+    avatar:String
+    phone: String
     address: String
     city: String
+}
+
+input UserProfileDeleteInput{
+    id: [ID!]!
 }
 
 "Account of a person who utilizes this application."
@@ -56,4 +94,11 @@ type User {
 
     "When the account was last updated."
     updated_at: DateTime!
+}
+
+type UserProfile {
+    avatar: String
+    phone: String
+    address: String
+    city: String
 }
