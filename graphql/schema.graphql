@@ -23,9 +23,7 @@ type Mutation {
     userCreate(
         input: UserCreateInput @spread
     ):User
-}
 
-extend type Mutation @guard{
     userUpdate(
         input: UserUpdateInput @spread
     ):User
@@ -42,6 +40,10 @@ extend type Mutation @guard{
         input: UserProfileDeleteInput @spread
     ):Boolean
 }
+
+#extend type Mutation @guard{
+#
+#}
 
 input UserCreateInput {
     type: UserType
@@ -62,7 +64,7 @@ input UserDeleteInput{
     id: [ID!]!
 }
 
-input UserProfileUpdate{
+input UserProfileUpdateInput{
     avatar:String
     phone: String
     address: String

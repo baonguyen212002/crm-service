@@ -3,6 +3,7 @@
 namespace App\GraphQL\Mutations;
 
 use App\Models\User;
+use App\Models\UserProfile;
 use Illuminate\Support\Facades\DB;
 
 final class UserDelete
@@ -15,8 +16,9 @@ final class UserDelete
     {
         DB::beginTransaction();
         try {
+            User::whereIn('id', (array) $args['id'])->get()->each->removeRole(3);
             User::whereIn('id', (array) $args['id'])->delete();
-
+            UserProfile::whereIn('userable_id', (array) $args['id'])->delete();
             DB::commit();
             return true;
         } catch (\Exception $e) {
