@@ -1,5 +1,6 @@
 "A datetime string with format `Y-m-d H:i:s`, e.g. `2018-05-23 13:43:32`."
 scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
+scalar Upload @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Upload")
 
 "Indicates what fields are available at the top level of a query operation."
 type Query {
@@ -35,10 +36,6 @@ type Mutation {
     userProfileUpdate (
         input: UserProfileUpdateInput @spread
     ):UserProfile
-
-    userProfileDelete(
-        input: UserProfileDeleteInput @spread
-    ):Boolean
 }
 
 #extend type Mutation @guard{
@@ -71,9 +68,6 @@ input UserProfileUpdateInput{
     city: String
 }
 
-input UserProfileDeleteInput{
-    id: [ID!]!
-}
 
 "Account of a person who utilizes this application."
 type User {
@@ -102,3 +96,4 @@ type UserProfile {
     address: String
     city: String
 }
+#import models/*.graphql

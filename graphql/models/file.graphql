@@ -1,0 +1,24 @@
+##########################
+############# MUTATION
+##################
+extend type Mutation {
+    fileImageUpload(
+        input: FileImageUploadInput! @spread
+    ): File
+}
+
+
+##########################
+############# INPUT
+##################
+input FileImageUploadInput {
+    image: Upload
+}
+
+##########################
+############# TYPE
+##################
+type File {
+    url: String
+    originalFilename: String @rename(attribute: "original_filename")
+}
