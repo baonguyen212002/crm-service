@@ -3,8 +3,10 @@
 namespace App\GraphQL\Mutations;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 final class UserUpdate
 {
@@ -16,17 +18,21 @@ final class UserUpdate
     {
         DB::beginTransaction();
         try {
-            $user = User::find($args['id']);
+            $userId = Auth::user()->hasRole(1) ? $args['id'] : Auth::user()->id;
+            $user = User::find($userId);
             $user->fill($args);
 
-            if (isset($args['password'])) {
+            if (isset($args['password']) && isset($args['current_password'])) {
+                if (!Hash::check($args['current_password'], $user->password)) {
+                    throw new \Exception("Current password does not match.");
+                }
                 $user->password = Hash::make($args['password']);
             }
 
             $user->save();
 
-            if (isset($args['role'])) {
-                $user->assignRole($args['role']);
+            if (isset($args['role']) && Auth::user()->hasRole(1)) {
+                $user->syncRoles($args['role']);
             }
 
             DB::commit();

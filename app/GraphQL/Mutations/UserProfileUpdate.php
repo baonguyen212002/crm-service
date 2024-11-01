@@ -4,6 +4,7 @@ namespace App\GraphQL\Mutations;
 
 use App\Models\User;
 use App\Models\UserProfile;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 final class UserProfileUpdate
@@ -16,7 +17,7 @@ final class UserProfileUpdate
     {
         DB::beginTransaction();
         try {
-            $userProfile = UserProfile::find($args['id']);
+            $userProfile = UserProfile::find(Auth::user()->id);
             $userProfile->fill($args);
 
             $userProfile->save();
@@ -26,7 +27,7 @@ final class UserProfileUpdate
         } catch (\Exception $e) {
             DB::rollBack();
 
-            throw new Exception($e->getMessage());
+            throw new \Exception($e->getMessage());
         }
     }
 }

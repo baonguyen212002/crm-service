@@ -1,0 +1,47 @@
+##########################
+############# MUTATION
+##################
+extend type Mutation {
+    login(
+        input: LoginInput! @spread
+    ): AuthToken
+
+#    forgotPassword(
+#        input: ForgotPasswordInput! @spread
+#    ): Boolean
+#
+#    updateForgottenPassword(
+#        input: UpdateForgottenPasswordInput! @spread
+#    ): Boolean
+}
+
+#extend type Mutation @guard {
+#    logout: Boolean!
+#}
+
+##########################
+############# INPUT
+##################
+input LoginInput {
+    email: String!
+    password: String!
+}
+
+#input ForgotPasswordInput {
+#    email: String!
+#}
+
+#input UpdateForgottenPasswordInput {
+#    token: String!
+#    password: String!
+#}
+
+##########################
+############# TYPE
+##################
+type AuthToken {
+    tokenType: String! @rename(attribute: "token_type")
+    expiresIn: Int @rename(attribute: "expires_in")
+    accessToken: String! @rename(attribute: "access_token")
+    refreshToken: String @rename(attribute: "refresh_token")
+}

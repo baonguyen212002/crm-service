@@ -53,7 +53,9 @@ input UserCreateInput {
 }
 
 input UserUpdateInput {
+    id: ID!
     name: String
+    currentPassword: String @rename(attribute: "current_password")
     password: String
 }
 
@@ -62,6 +64,7 @@ input UserDeleteInput{
 }
 
 input UserProfileUpdateInput{
+    id: ID!
     avatar:String
     phone: String
     address: String
