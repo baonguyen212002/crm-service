@@ -10,9 +10,9 @@ extend type Mutation {
         input: ForgotPasswordInput! @spread
     ): Boolean
 
-#    updateForgottenPassword(
-#        input: UpdateForgottenPasswordInput! @spread
-#    ): Boolean
+    updateForgottenPassword(
+        input: UpdateForgottenPasswordInput! @spread
+    ): Boolean
 }
 
 #extend type Mutation @guard {
@@ -31,10 +31,10 @@ input ForgotPasswordInput {
     email: String!
 }
 
-#input UpdateForgottenPasswordInput {
-#    token: String!
-#    password: String!
-#}
+input UpdateForgottenPasswordInput {
+    token: String!
+    password: String!
+}
 
 ##########################
 ############# TYPE
