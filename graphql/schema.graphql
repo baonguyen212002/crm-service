@@ -43,7 +43,6 @@ type Mutation {
 #}
 
 input UserCreateInput {
-    type: UserType
     name: String
     email: String
     phone: String
