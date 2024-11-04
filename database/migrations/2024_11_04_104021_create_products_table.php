@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('title_en');
             $table->string('title_vi');
             $table->json('images');
+            $table->string('main_image')->nullable();
             $table->text('description_en')->nullable();
             $table->text('description_vi')->nullable();
             $table->text('content_en')->nullable();
