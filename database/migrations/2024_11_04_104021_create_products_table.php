@@ -16,13 +16,14 @@ return new class extends Migration
             $table->string('name');
             $table->string('title_en');
             $table->string('title_vi');
+            $table->string('slug', 1000);
             $table->json('images');
             $table->string('main_image')->nullable();
             $table->text('description_en')->nullable();
             $table->text('description_vi')->nullable();
             $table->text('content_en')->nullable();
             $table->text('content_vi')->nullable();
-            $table->string('slug', 1000);
+            $table->tinyInteger('sizes');
             $table->float('price');
             $table->timestamps();
         });
