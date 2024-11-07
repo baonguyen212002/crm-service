@@ -1,0 +1,10 @@
+frontend:
+    path: .
+    publish: dist
+    scripts:
+        build: npm run build
+        deploy: npm install
+    subdomain: crm-service
+name: crm-service
+region: us-east-1
+yamlVersion: 2
