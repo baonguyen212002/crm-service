@@ -1,38 +1,38 @@
 ##########################
 ############# QUERY
 ##################
-extend type Query {
-
-}
+#extend type Query {
+#
+#}
 
 ##########################
 ############# MUTATION
 ##################
-extend type Mutation {
-    productCreate(
-        input: ProductCreateInput @spread
-    ):Product
-}
+#extend type Mutation {
+#    productCreate(
+#        input: ProductCreateInput @spread
+#    ):Product
+#}
 
 
 ##########################
 ############# INPUT
 ##################
-input ProductCreateInput {
-    name: String
-    images: [String]
-    slug: String
-    titleEn: String @rename(attribute: "title_en")
-    titleVi: String @rename(attribute: "title_vi")
-    contentEn: String @rename(attribute: "content_en")
-    contentVi: String @rename(attribute: "content_vi")
-    descriptionEn: String @rename(attribute: "description_en")
-    descriptionVi: String @rename(attribute: "description_vi")
-    types: [ID!]
-    sizes: [ProductSize!]!
-    price: Float
-
-}
+#input ProductCreateInput {
+#    name: String
+#    images: [String]
+#    slug: String
+#    titleEn: String @rename(attribute: "title_en")
+#    titleVi: String @rename(attribute: "title_vi")
+#    contentEn: String @rename(attribute: "content_en")
+#    contentVi: String @rename(attribute: "content_vi")
+#    descriptionEn: String @rename(attribute: "description_en")
+#    descriptionVi: String @rename(attribute: "description_vi")
+#    types: [ID!]
+#    sizes: [ProductSize!]!
+#    price: Float
+#
+#}
 
 
 ##########################

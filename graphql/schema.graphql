@@ -7,10 +7,10 @@ type Query {
     "Find a single user by an identifying attribute."
     user(
       "Search by primary key."
-      id: ID @eq @rules(apply: ["prohibits:email", "required_without:email"])
+      id: ID @eq
 
       "Search by email address."
-      email: String @eq @rules(apply: ["prohibits:id", "required_without:id", "email"])
+      email: String @eq
     ): User @find
 
     "List multiple users."
@@ -20,7 +20,7 @@ type Query {
     ): [User!]! @paginate(defaultCount: 10)
 }
 
-type Mutation {
+type Mutation @guard{
     userCreate(
         input: UserCreateInput @spread
     ):User
@@ -37,10 +37,6 @@ type Mutation {
         input: UserProfileUpdateInput @spread
     ):UserProfile
 }
-
-#extend type Mutation @guard{
-#
-#}
 
 input UserCreateInput {
     name: String
