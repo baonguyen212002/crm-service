@@ -1,0 +1,20 @@
+##########################
+############# ENUM
+##################
+enum PermissionsWhereColumn {
+    ID @enum(value: "id")
+    NAME @enum(value: "name")
+    TITLE @enum(value: "title")
+}
+enum PermissionsOrderByColumn {
+    createdAt @enum(value: "created_at")
+}
+
+##########################
+############# TYPE
+##################
+type Permission {
+    id: ID
+    name: String
+    title: String
+}

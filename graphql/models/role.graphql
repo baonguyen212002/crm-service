@@ -1,0 +1,42 @@
+##########################
+############# QUERY
+##################
+extend type Query @guard {
+    roles(
+        where: _ @whereConditions(columnsEnum: "RolesWhereColumn")
+        orderBy: _ @orderBy(columnsEnum: "RolesOrderByColumn")
+    ): [Role]
+    @paginate(defaultCount: 10)
+}
+
+##########################
+############# ENUM
+##################
+enum RolesWhereColumn {
+    ID @enum(value: "id")
+    NAME @enum(value: "name")
+}
+enum RolesOrderByColumn {
+    createdAt @enum(value: "created_at")
+}
+
+
+##########################
+############# INPUT
+##################
+input RolesFilterInput {
+    name: String @where(operator: "like")
+}
+
+##########################
+############# TYPE
+##################
+type Role {
+    id: ID
+    name: String
+    permissions(
+        where: _ @whereConditions(columnsEnum: "PermissionsWhereColumn")
+        orderBy: _ @orderBy(columnsEnum: "PermissionsOrderByColumn")
+    ): [Permission] @hasMany(type: PAGINATOR, defaultCount: 10)
+    createdAt: DateTime @rename(attribute: "created_at")
+}
