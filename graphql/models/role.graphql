@@ -6,7 +6,7 @@ extend type Query @guard {
         where: _ @whereConditions(columnsEnum: "RolesWhereColumn")
         orderBy: _ @orderBy(columnsEnum: "RolesOrderByColumn")
     ): [Role]
-    @paginate(defaultCount: 10)
+    @paginate(defaultCount: 10, model: "Spatie\\Permission\\Models\\Role")
 }
 
 ##########################
@@ -31,7 +31,7 @@ input RolesFilterInput {
 ##########################
 ############# TYPE
 ##################
-type Role {
+type Role @model(class: "Spatie\\Permission\\Models\\Role") {
     id: ID
     name: String
     permissions(
