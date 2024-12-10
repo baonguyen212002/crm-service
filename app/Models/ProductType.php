@@ -10,8 +10,10 @@ class ProductType extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'slug'
+        'title_en',
+        'title_vi',
+        'slug_en',
+        'slug_vi'
     ];
 
     // Relationship với Product qua bảng pivot

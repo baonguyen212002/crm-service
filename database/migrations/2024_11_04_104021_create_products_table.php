@@ -13,17 +13,17 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
             $table->string('title_en');
             $table->string('title_vi');
-            $table->string('slug', 1000);
-            $table->json('images');
+            $table->string('slug_en', 1000);
+            $table->string('slug_vi', 1000);
+            $table->json('images')->nullable();
             $table->string('main_image')->nullable();
             $table->text('description_en')->nullable();
             $table->text('description_vi')->nullable();
             $table->text('content_en')->nullable();
             $table->text('content_vi')->nullable();
-            $table->tinyInteger('sizes');
+            $table->json('sizes');
             $table->float('price');
             $table->timestamps();
         });

@@ -11,23 +11,23 @@ class Product extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
         'title_en',
         'title_vi',
-        'slug',
+        'slug_en',
+        'slug_vi',
         'images',
         'main_image',
         'description_en',
         'description_vi',
         'content_en',
         'content_vi',
-        'size',
+        'sizes',
         'price'
     ];
 
     protected $casts = [
         'images' => 'array',
-        'size' => ProductSize::class,
+        'sizes' => 'array',
         'price' => 'float',
     ];
 
