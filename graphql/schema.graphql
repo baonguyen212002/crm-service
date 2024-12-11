@@ -20,11 +20,13 @@ type Query {
     ): [User!]! @paginate(defaultCount: 10)
 }
 
-type Mutation @guard{
+type Mutation {
     userCreate(
         input: UserCreateInput @spread
     ):User
+}
 
+extend type Mutation @guard {
     userUpdate(
         input: UserUpdateInput @spread
     ):User

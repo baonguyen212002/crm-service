@@ -2,6 +2,8 @@
 
 namespace App\GraphQL\Mutations;
 
+use App\Models\Product;
+
 final class ProductDelete
 {
     /**
@@ -10,6 +12,13 @@ final class ProductDelete
      */
     public function __invoke($_, array $args)
     {
-        // TODO implement the resolver
+        Product::whereIn('id', $args['id'])->each(function($product) {
+            if ($product->productTypes()->exists()) {
+                $product->productTypes()->detach();
+                $product->delete();
+            }
+        });
+
+        return true;
     }
 }
