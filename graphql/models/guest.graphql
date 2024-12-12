@@ -15,9 +15,9 @@ extend type Mutation {
     ): Boolean
 }
 
-#extend type Mutation @guard {
-#    logout: Boolean!
-#}
+extend type Mutation @guard {
+    logout: Boolean!
+}
 
 ##########################
 ############# INPUT

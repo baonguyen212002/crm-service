@@ -1,0 +1,79 @@
+# #########################
+# ############ QUERY
+# #################
+extend type Query @guard {
+	productType(
+	id: ID @eq
+	): ProductType
+	@find
+
+	productTypes(
+	where: _ @whereConditions(columnsEnum: "ProductTypeWhereColumn")
+	orderBy: _ @orderBy(columnsEnum: "ProductTypeColumn")
+	): [ProductType]
+	@paginate(defaultCount: 10)
+}
+
+# #########################
+# ############ MUTATION
+# #################
+extend type Mutation @guard {
+	productTypeCreate(
+	input: ProductTypeCreateInput! @spread
+	): ProductType
+
+	productTypeDelete(
+	input: ProductTypeDeleteInput! @spread
+	): Boolean
+
+	productTypeUpdate(
+	input: ProductTypeUpdateInput! @spread
+	): ProductType
+}
+
+# #########################
+# ############ ENUM
+# #################
+enum ProductTypeWhereColumn {
+	ID @enum(value: "id")
+	TITLE_EN @enum(value: "title_en")
+    TITLE_VI @enum(value: "title_vi")
+}
+enum ProductTypeColumn {
+	createdAt @enum(value: "created_at")
+}
+
+# #########################
+# ############ INPUT
+# #################
+input ProductTypeCreateInput {
+	titleEn: String @rename(attribute: "title_en")
+	slugEn: String @rename(attribute: "slug_en")
+	titleVi: String @rename(attribute: "title_vi")
+	slugVi: String @rename(attribute: "slug_vi")
+}
+
+input ProductTypeUpdateInput {
+	id: ID!
+	titleEn: String @rename(attribute: "title_en")
+	slugEn: String @rename(attribute: "slug_en")
+	titleVi: String @rename(attribute: "title_vi")
+	slugVi: String @rename(attribute: "slug_vi")
+}
+
+input ProductTypeDeleteInput {
+	id: [ID!]!
+}
+
+# #########################
+# ############ TYPE
+# #################
+type ProductType {
+	id: ID
+	titleEn: String @rename(attribute: "title_en")
+	slugEn: String @rename(attribute: "slug_en")
+	titleVi: String @rename(attribute: "title_vi")
+	slugVi: String @rename(attribute: "slug_vi")
+	createdAt: DateTime! @rename(attribute: "created_at")
+	updatedAt: DateTime! @rename(attribute: "updated_at")
+}

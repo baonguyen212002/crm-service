@@ -5,7 +5,7 @@ namespace App\GraphQL\Mutations;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
-final class UpdateForgotPassword
+final class UpdateForgottenPassword
 {
     /**
      * @param  null  $_
