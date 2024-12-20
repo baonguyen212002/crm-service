@@ -3,6 +3,7 @@
 namespace App\GraphQL\Mutations;
 
 use App\Models\Product;
+use Illuminate\Support\Facades\DB;
 
 final class ProductDelete
 {
@@ -12,13 +13,21 @@ final class ProductDelete
      */
     public function __invoke($_, array $args)
     {
-        Product::whereIn('id', $args['id'])->each(function($product) {
-            if ($product->productTypes()->exists()) {
-                $product->productTypes()->detach();
-                $product->delete();
-            }
-        });
+        DB::beginTransaction();
+        try {
+            Product::whereIn('id', $args['id'])->each(function($product) {
+                if ($product->productTypes()->exists()) {
+                    $product->productTypes()->detach();
+                    $product->delete();
+                }
+            });
+            DB::commit();
+            return true;
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw new \Exception($e->getMessage());
+            return false;
+        }
 
-        return true;
     }
 }

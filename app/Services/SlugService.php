@@ -8,18 +8,13 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class SlugService {
-    public function createUniqueSlug($slug = null, $title = null, Model $model, $slugColumn) {
+    public function createUniqueSlug($slug = null, $title, Model $model, $slugColumn) {
         // Clean up inputs
         $slug = trim($slug ?? '');
         $title = trim($title ?? '');
         
         // Determine which string to use for slug generation
         if (empty($slug) || $slug === '-') {
-            // If slug is empty or just a dash, use title
-            if (empty($title)) {
-                // If both are empty, generate a timestamp-based slug
-                return 'item-' . time();
-            }
             $slugString = $title;
         } else {
             $slugString = $slug;
