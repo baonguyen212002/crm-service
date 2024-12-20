@@ -173,6 +173,8 @@ return [
          * Other Service Providers
          */
         App\GraphQL\GraphQLServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
+        \Nuwave\Lighthouse\WhereConditions\WhereConditionsServiceProvider::class,
     ])->toArray(),
 
     /*

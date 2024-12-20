@@ -2,10 +2,10 @@
 
 namespace App\GraphQL\Mutations;
 
-use App\Models\User;
+use App\Models\Product;
 use Illuminate\Support\Facades\DB;
 
-final class UpdateForgotPassword
+final class ProductDelete
 {
     /**
      * @param  null  $_
@@ -15,17 +15,19 @@ final class UpdateForgotPassword
     {
         DB::beginTransaction();
         try {
-            $passwordReset = DB::table('password_reset_tokens')->where(['token' => $args['token']])->first();
-
-            if ($passwordReset) {
-                User::where('email', $passwordReset->email)->update(['password' => $passwordReset->password]);
-                DB::table('password_reset_tokens')->where(['token' => $passwordReset->token])->delete();
-            }
+            Product::whereIn('id', $args['id'])->each(function($product) {
+                if ($product->productTypes()->exists()) {
+                    $product->productTypes()->detach();
+                    $product->delete();
+                }
+            });
             DB::commit();
             return true;
         } catch (\Exception $e) {
             DB::rollBack();
             throw new \Exception($e->getMessage());
+            return false;
         }
+
     }
 }

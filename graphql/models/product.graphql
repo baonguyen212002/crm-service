@@ -1,0 +1,96 @@
+##########################
+############# QUERY
+##################
+extend type Query {
+    product(id: ID @eq): Product @find
+
+    products(
+        where: _ @whereConditions(columnsEnum: "ProductsWhereColumn")
+        orderBy: _ @orderBy(columnsEnum: "ProductsOrderByColumn")
+    ): Product @paginate(defaultCount: 10)
+}
+
+##########################
+############# MUTATION
+##################
+extend type Mutation @guard {
+    productCreate(input: ProductCreateInput @spread): Product
+
+    productUpdate(input: ProductUpdateInput @spread): Product
+
+    productDelete(input: ProductDeleteInput @spread): Boolean
+}
+
+##########################
+############# ENUM
+##################
+enum ProductsWhereColumn {
+    ID @enum(value: "id")
+    TITLE_EN @enum(value: "title_en")
+    TITLE_VI @enum(value: "title_vi")
+    SLUG @enum(value: "slug")
+    STATUS @enum(value: "status")
+}
+
+enum ProductsOrderByColumn {
+    createdAt @enum(value: "created_at")
+}
+
+##########################
+############# INPUT
+##################
+input ProductCreateInput @validator {
+    images: [String]
+    slugEn: String @rename(attribute: "slug_en")
+    slugVi: String @rename(attribute: "slug_vi")
+    titleEn: String @rename(attribute: "title_en")
+    titleVi: String @rename(attribute: "title_vi")
+    contentEn: String @rename(attribute: "content_en")
+    contentVi: String @rename(attribute: "content_vi")
+    descriptionEn: String @rename(attribute: "description_en")
+    descriptionVi: String @rename(attribute: "description_vi")
+    types: CreateProductTypesHasMany
+    sizes: [ProductSize!]!
+    price: Float
+}
+
+input CreateProductTypesHasMany {
+    sync: [ID!]!
+}
+
+input ProductUpdateInput @validator {
+    id: ID!
+    images: [String]
+    titleEn: String @rename(attribute: "title_en")
+    slugEn: String @rename(attribute: "slug_en")
+    titleVi: String @rename(attribute: "title_vi")
+    slugVi: String @rename(attribute: "slug_vi")
+    descriptionEn: String @rename(attribute: "description_en")
+    descriptionVi: String @rename(attribute: "description_vi")
+    contentEn: String @rename(attribute: "content_en")
+    contentVi: String @rename(attribute: "content_vi")
+    price: Float
+}
+
+input ProductDeleteInput {
+    id: [ID!]!
+}
+
+##########################
+############# TYPE
+##################
+type Product {
+    id: ID!
+    images: [String]
+    slugEn: String @rename(attribute: "slug_en")
+    slugVi: String @rename(attribute: "slug_vi")
+    titleEn: String @rename(attribute: "title_en")
+    titleVi: String @rename(attribute: "title_vi")
+    descriptionEn: String @rename(attribute: "description_en")
+    descriptionVi: String @rename(attribute: "description_vi")
+    contentEn: String @rename(attribute: "content_en")
+    contentVi: String @rename(attribute: "content_vi")
+    types: [ProductType] @hasMany(relation: "productTypes")
+    sizes: [ProductSize]
+    price: Float
+}
