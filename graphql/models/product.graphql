@@ -39,7 +39,7 @@ enum ProductsOrderByColumn {
 ##########################
 ############# INPUT
 ##################
-input ProductCreateInput {
+input ProductCreateInput @validator {
     images: [String]
     slugEn: String @rename(attribute: "slug_en")
     slugVi: String @rename(attribute: "slug_vi")
@@ -58,7 +58,7 @@ input CreateProductTypesHasMany {
     sync: [ID!]!
 }
 
-input ProductUpdateInput {
+input ProductUpdateInput @validator {
     id: ID!
     images: [String]
     titleEn: String @rename(attribute: "title_en")
