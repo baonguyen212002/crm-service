@@ -2,6 +2,7 @@
 
 namespace App\GraphQL;
 
+use App\Enums\ProductSize;
 use App\Enums\UserStatus;
 use App\Enums\UserType;
 use Illuminate\Support\ServiceProvider;
@@ -28,6 +29,9 @@ class GraphQLServiceProvider extends ServiceProvider
         );
         $typeRegistry->register(
             new LaravelEnumType(UserStatus::class)
+        );
+        $typeRegistry->register(
+            new LaravelEnumType(ProductSize::class)
         );
     }
 }
