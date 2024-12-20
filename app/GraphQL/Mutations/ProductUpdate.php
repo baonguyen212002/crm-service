@@ -13,6 +13,7 @@ final class ProductUpdate
      * @param  null  $_
      * @param  array{}  $args
      */
+
     public function __construct(protected SlugService $slugService) {}
 
     public function __invoke($_, array $args)
@@ -28,7 +29,7 @@ final class ProductUpdate
             $product->slug_vi = $slugVi;
 
             $product->save();
-
+          
             return $product;
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());
