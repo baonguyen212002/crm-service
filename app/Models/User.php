@@ -48,4 +48,9 @@ class User extends Authenticatable
     {
         return $this->roles()->first();
     }
+
+    public function userProfile()
+    {
+        return $this->morphOne(UserProfile::class, 'userable');
+    }
 }
