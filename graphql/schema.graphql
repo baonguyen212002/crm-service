@@ -89,7 +89,7 @@ type User {
     ): [Role] @morphMany(type: PAGINATOR, defaultCount: 10)
     role: Role @method(name: "getRole")
     permissions: [Permission] @method(name: "getPermissionsViaRoles")
-    userProfile: UserProfile @belongsTo
+    userProfile: UserProfile @morphTo
 }
 
 type UserProfile {
