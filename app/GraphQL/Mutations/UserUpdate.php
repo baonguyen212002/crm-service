@@ -3,6 +3,7 @@
 namespace App\GraphQL\Mutations;
 
 use App\Models\User;
+use App\Models\UserProfile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -33,6 +34,12 @@ final class UserUpdate
 
             if (isset($args['role']) && Auth::user()->hasRole(1)) {
                 $user->syncRoles($args['role']);
+            }
+
+            $userProfile = UserProfile::where('userable_id', $userId)->first();
+            if ($userProfile) {
+                $userProfile->fill($args);
+                $userProfile->save();
             }
 
             DB::commit();

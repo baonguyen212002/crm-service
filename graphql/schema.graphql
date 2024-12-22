@@ -54,6 +54,11 @@ input UserUpdateInput {
     name: String
     currentPassword: String @rename(attribute: "current_password")
     password: String
+    role: String
+    avatar:String
+    phone: String
+    address: String
+    city: String
 }
 
 input UserDeleteInput{
