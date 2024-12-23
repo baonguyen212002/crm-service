@@ -34,10 +34,6 @@ extend type Mutation @guard {
     userDelete(
         input: UserDeleteInput @spread
     ):Boolean
-
-    userProfileUpdate (
-        input: UserProfileUpdateInput @spread
-    ):UserProfile
 }
 
 input UserCreateInput {
@@ -64,15 +60,6 @@ input UserUpdateInput {
 input UserDeleteInput{
     id: [ID!]!
 }
-
-input UserProfileUpdateInput{
-    id: ID!
-    avatar:String
-    phone: String
-    address: String
-    city: String
-}
-
 
 "Account of a person who utilizes this application."
 type User {
